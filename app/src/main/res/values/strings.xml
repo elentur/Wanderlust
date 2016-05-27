@@ -14,4 +14,15 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="route_waehlen">Route wählen</string>
+    <string name="navigation">Navigation</string>
+    <string name="profil">Profil</string>
+    <string name="evaluation">Evaluation</string>
+    <string name="settings">Settings</string>
 </resources>

@@ -23,13 +23,30 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".OwnMapsActivity" />
-        <activity android:name=".RoutesActivity" />
-        <activity android:name=".RouteInfoActivity" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".EvaluationActivity"></activity>
+
+        <activity
+            android:name=".RoutesActivity"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".RouteInfoActivity"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".EvaluationActivity"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".OwnMapsActivity"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TestActivity"/>
     </application>
 
 </manifest>
