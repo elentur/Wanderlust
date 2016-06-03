@@ -3,6 +3,7 @@ package com.se2.wanderlust;
 import android.app.Activity;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Drawer{
 
-    public static void setUpDrawer(final Activity a){
+    public static void setUpDrawer(final AppCompatActivity a){
         String[] mPlanetTitles = a.getResources().getStringArray(R.array.options);
         DrawerLayout mDrawerLayout = (DrawerLayout) a.findViewById(R.id.drawer_layout);
         ListView mDrawerList = (ListView) a.findViewById(R.id.left_drawer);
@@ -41,10 +42,12 @@ public class Drawer{
                 a.getActionBar().setTitle("Opened test");
             }
         };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-//        a.getActionBar().setDisplayHomeAsUpEnabled(true);
-  //      a.getActionBar().setHomeButtonEnabled(true);
+
         // Set the drawer toggle as the DrawerListener
+        System.out.println(a.getActionBar());
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        a.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+      a.getSupportActionBar().setHomeButtonEnabled(true);
 
     }
 }
