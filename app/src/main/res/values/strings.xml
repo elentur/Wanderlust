@@ -25,4 +25,5 @@
     <string name="profil">Profil</string>
     <string name="evaluation">Evaluation</string>
     <string name="settings">Settings</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
 </resources>
