@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_navigation"
+            android:icon="@android:drawable/ic_menu_compass"
+            android:title="@string/navigation" />
+        <item
+            android:id="@+id/nav_route"
+            android:icon="@android:drawable/ic_menu_mapmode"
+            android:title="@string/route_waehlen" />
+        <item
+            android:id="@+id/nav_route_info"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="@string/route_info" />
+        <item
+            android:id="@+id/nav_own_material"
+            android:icon="@android:drawable/ic_menu_save"
+            android:title="@string/own_material" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="@string/settings" />
+    </group>
+
+</menu>

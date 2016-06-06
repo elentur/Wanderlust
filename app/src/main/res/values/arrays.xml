@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="options">
-        <item name="navigation">Navigation</item>
+    <string-array name="routes" >
+        <item>route1</item>
+        <item>route2</item>
+        <item>route3</item>
+        <item>route4</item>
     </string-array>
 </resources>
