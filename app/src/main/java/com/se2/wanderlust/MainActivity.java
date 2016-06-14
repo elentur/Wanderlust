@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
+        //Das ist ein Kommentar
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
