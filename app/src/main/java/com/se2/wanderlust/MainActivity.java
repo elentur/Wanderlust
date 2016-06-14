@@ -16,6 +16,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     protected View actualView;
+    protected final static String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity
             View v = findViewById(R.id.route_layout);
             v.setVisibility(View.VISIBLE);
             actualView = v;
+            //Test
         } else if (id == R.id.nav_route_info) {
             View v = findViewById(R.id.route_info_layout);
             v.setVisibility(View.VISIBLE);

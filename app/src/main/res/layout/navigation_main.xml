@@ -16,7 +16,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:id="@+id/imageView2"
+        android:id="@+id/btnStart"
         android:src="@drawable/abc_btn_radio_to_on_mtrl_015"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -25,9 +25,10 @@
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:id="@+id/imageView3"
+        android:id="@+id/btnInfo"
         android:src="@android:drawable/ic_menu_info_details"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

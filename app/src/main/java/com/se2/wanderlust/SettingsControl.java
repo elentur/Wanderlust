@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity;
  * Created by Marcus Bätz on 05.06.2016.
  */
 public class SettingsControl {
-    private final AppCompatActivity act;
-    public SettingsControl(AppCompatActivity mainActivity) {
+    private final MainActivity act;
+    public SettingsControl(MainActivity mainActivity) {
         act = mainActivity;
     }
 }
