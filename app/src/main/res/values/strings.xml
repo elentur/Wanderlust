@@ -31,4 +31,5 @@
     <string name="route_info">Routen Info</string>
     <string name="own_material">Eigenes Kartenmaterial</string>
     <string name="public_pictures">Fotos öffentlich</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
