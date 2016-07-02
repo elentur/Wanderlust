@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3000, 0, new WanderLustLocationListener(myCallBack));
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 0, new WanderLustLocationListener(myCallBack));
 
 
     }

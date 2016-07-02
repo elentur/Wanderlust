@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -25,9 +26,9 @@ import java.util.List;
  */
 public class WanderLustLocationListener implements LocationListener {
     private final MapCallback myCallBack;
-    private final MarkerOptions marker = new MarkerOptions().position(new LatLng(0,0)).title("Meine Position");
-    Polyline polyLine = null ;
-    PolylineOptions polylineOptions =new PolylineOptions().width(5).color(Color.RED);
+    private  Marker marker = null;
+    private Polyline polyLine = null ;
+    private PolylineOptions polylineOptions =new PolylineOptions().width(5).color(Color.RED);
     private boolean markerAdded = false;
     private List<Location> locations = new ArrayList<>();
 
@@ -48,12 +49,12 @@ public class WanderLustLocationListener implements LocationListener {
             //timer++;
             locations.add(location);
             if(locations.size()%10==0) GPX.writePath(new File(Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_DOCUMENTS),"test.gpx" ),"test1",locations);
+                    Environment.DIRECTORY_PICTURES),"test.gpx" ),"test1",locations);
             LatLng myPos = new LatLng(location.getLatitude(), location.getLongitude());
             Log.d("DEBUGGER",myPos+"");
-            marker.position(myPos);
+            if(marker != null)marker.setPosition(myPos);
            if(!markerAdded){
-               map.addMarker(marker);
+              marker = map.addMarker(new MarkerOptions().position(myPos).title("Meine Position"));
                markerAdded=true;
                map.moveCamera(CameraUpdateFactory.zoomTo(14.0f));
                polyLine =  map.addPolyline(polylineOptions);
