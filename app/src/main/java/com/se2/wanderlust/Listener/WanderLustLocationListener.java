@@ -19,6 +19,7 @@ import com.se2.wanderlust.Support.GPX;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -32,9 +33,12 @@ public class WanderLustLocationListener implements LocationListener {
     private boolean markerAdded = false;
     private List<Location> locations = new ArrayList<>();
 
+
+
 //test
     private int timer = 0;
     private LatLng[] lt = {new LatLng(52,13),new LatLng(52,15),new LatLng(55,15)};
+    private Location location;
 
     public WanderLustLocationListener(MapCallback myCallBack) {
         this.myCallBack=myCallBack;
@@ -43,13 +47,14 @@ public class WanderLustLocationListener implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         GoogleMap map = myCallBack.getMap();
+        this.location = location;
         if(map!=null){
             //LatLng myPos = new LatLng(0,0);
             //if(timer <lt.length)myPos=lt[timer];
             //timer++;
             locations.add(location);
             if(locations.size()%10==0) GPX.writePath(new File(Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES),"test.gpx" ),"test1",locations);
+                    Environment.DIRECTORY_PICTURES),"actualRoot.gpx" ),"Route",locations);
             LatLng myPos = new LatLng(location.getLatitude(), location.getLongitude());
             Log.d("DEBUGGER",myPos+"");
             if(marker != null)marker.setPosition(myPos);
@@ -84,5 +89,10 @@ public class WanderLustLocationListener implements LocationListener {
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+
+    public Location getLocation() {
+        return location;
     }
 }
