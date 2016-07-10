@@ -18,6 +18,7 @@ import java.util.List;
 public class GPX {
     private static final String TAG = GPX.class.getName();
     private static HashMap<Location,String> picture = new HashMap<>();
+    public static int trackTime = 3000;
     public static void writePath(File file, String n, List<Location> points) {
 
         String header = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?><gpx xmlns=\"http://www.topografix.com/GPX/1/1\" creator=\"MapSource 6.15.5\" version=\"1.1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"  xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\"><trk>\n";

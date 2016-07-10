@@ -27,12 +27,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+
         <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/public_pictures"
             android:id="@+id/chkPuplicPictures"
             android:checked="true" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Trackingrate in ms: " />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id ="@+id/lblTrackRate"
+            android:text ="0"
+      />
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/public_pictures"
+            android:id="@+id/sldTrackRate"
+            android:max = "60000"
+            />
     </LinearLayout>
 
 </LinearLayout>

@@ -21,11 +21,16 @@
 
     </android.support.design.widget.AppBarLayout>
 
-   <include layout="@layout/navigation_main" />
+    <include layout="@layout/navigation_main" />
+
     <include layout="@layout/route_main" />
+
     <include layout="@layout/route_info_main" />
+
     <include layout="@layout/settings_main" />
+
     <include layout="@layout/own_material_main" />
+
     <include layout="@layout/profile_main" />
 
 </android.support.design.widget.CoordinatorLayout>
