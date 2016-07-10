@@ -23,8 +23,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.se2.wanderlust.Listener.MapCallback;
 import com.se2.wanderlust.Listener.WanderLustLocationListener;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     protected View actualView;
     protected final static String TAG = MainActivity.class.getSimpleName();
     public WanderLustLocationListener locationListener;
@@ -72,7 +71,6 @@ public class MainActivity extends AppCompatActivity
         }
         locationListener=new WanderLustLocationListener(myCallBack);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 0, locationListener);
-
 
     }
 
