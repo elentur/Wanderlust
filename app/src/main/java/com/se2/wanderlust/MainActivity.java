@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private LocationManager locationManager;
 
     protected double hPa;
-    protected double height;
+    public double height;
     protected boolean existBarometer = false;
     protected Sensor mSensorPressure;
     protected SensorManager mSensorManager;
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void startLocationManager(MapCallback myCallBack) {
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        this.locationListener = new WanderLustLocationListener(myCallBack,this.height,existBarometer);
+        this.locationListener = new WanderLustLocationListener(myCallBack,this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
