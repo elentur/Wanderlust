@@ -2,7 +2,12 @@ package com.se2.wanderlust;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,17 +24,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.TextView;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.se2.wanderlust.Listener.MapCallback;
 import com.se2.wanderlust.Listener.WanderLustLocationListener;
 import com.se2.wanderlust.Support.GPX;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, SensorEventListener {
     protected View actualView;
     protected final static String TAG = MainActivity.class.getSimpleName();
     public WanderLustLocationListener locationListener;
     private LocationManager locationManager;
+
+    protected double hPa;
+    protected double height;
+    protected boolean existBarometer = false;
+    protected Sensor mSensorPressure;
+    protected SensorManager mSensorManager;
 
 
     @Override
@@ -48,6 +59,19 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorPressure = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
+        // TODO überprüfen ob bei keinem TYPE_PRESSURE Sensor eine Exception fliegt
+        if(mSensorPressure != null) existBarometer = true;
+        mSensorManager.registerListener(this, mSensorPressure, SensorManager.SENSOR_DELAY_NORMAL);
+
+        hPa = getHPa();
+
+        if(hPa <= 0){
+            hPa = 1015;
+            saveHPa(hPa);
+        }
+
 
         actualView = findViewById(R.id.navigation_layout);
         new NavigationControl(this);
@@ -56,10 +80,6 @@ public class MainActivity extends AppCompatActivity
         new RouteControl(this);
         new RouteInfoControl(this);
         new SettingsControl(this);
-
-
-
-
 
     }
 
@@ -118,7 +138,7 @@ public class MainActivity extends AppCompatActivity
 
     public void startLocationManager(MapCallback myCallBack) {
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        this.locationListener = new WanderLustLocationListener(myCallBack);
+        this.locationListener = new WanderLustLocationListener(myCallBack,this.height,existBarometer);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -134,5 +154,50 @@ public class MainActivity extends AppCompatActivity
 
     public void closeLocationManager() {
         if (locationManager != null) locationManager.removeUpdates(locationListener);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor == mSensorPressure) {
+            height = (288.15/0.0065 )*(1-Math.pow(event.values[0]/hPa,1/5.255));
+            TextView hpaText = (TextView) findViewById(R.id.pressure);
+            hpaText.setText(String.format("%.1f hPa",hPa));
+
+            TextView meterText = (TextView) findViewById(R.id.meterValue);
+            meterText.setText(String.format("%.0f m" , height));
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    /**
+     * Gets the hPa from the config preference.
+     * @return double hPa, retruns 0.0 if no entry found.
+     */
+    private double getHPa(){
+        SharedPreferences config = getSharedPreferences("config", MODE_PRIVATE);
+        String str = config.getString("hPa", "");
+        if(str.isEmpty()){
+            return 0.0;
+        }
+
+        return Double.valueOf(str);
+    }
+
+    /**
+     * Saves the hPa in the config preference.
+     * @param hPa double hPa
+     */
+    protected void saveHPa(double hPa){
+
+        if(hPa < 0) throw new IllegalArgumentException("hPa can't be lower than zero!");
+
+        SharedPreferences.Editor config = getSharedPreferences("config", MODE_PRIVATE).edit();
+        config.clear();
+        config.putString( "hPa", String.valueOf(hPa));
+        config.apply();
     }
 }

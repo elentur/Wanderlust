@@ -27,49 +27,60 @@ import java.util.List;
  */
 public class WanderLustLocationListener implements LocationListener {
     private final MapCallback myCallBack;
-    private  Marker marker = null;
-    private Polyline polyLine = null ;
-    private PolylineOptions polylineOptions =new PolylineOptions().width(5).color(Color.RED);
+    private Marker marker = null;
+    private Polyline polyLine = null;
+    private PolylineOptions polylineOptions = new PolylineOptions().width(5).color(Color.RED);
     private boolean markerAdded = false;
     private List<Location> locations = new ArrayList<>();
+    private double height;
+    private boolean existBarometer;
 
 
-
-//test
+    //test
     private int timer = 0;
-    private LatLng[] lt = {new LatLng(52,13),new LatLng(52,15),new LatLng(55,15)};
+    private LatLng[] lt = {new LatLng(52, 13), new LatLng(52, 15), new LatLng(55, 15)};
     private Location location;
 
-    public WanderLustLocationListener(MapCallback myCallBack) {
-        this.myCallBack=myCallBack;
+    public WanderLustLocationListener(MapCallback myCallBack, double height, boolean existBarometer) {
+        this.myCallBack = myCallBack;
+        this.height = height;
+        this.existBarometer = existBarometer;
     }
 
     @Override
     public void onLocationChanged(Location location) {
         GoogleMap map = myCallBack.getMap();
+
+        location.setAltitude(this.height);
+
         this.location = location;
-        if(map!=null){
-            //LatLng myPos = new LatLng(0,0);
-            //if(timer <lt.length)myPos=lt[timer];
-            //timer++;
+
+        if (map != null) {
+
             locations.add(location);
-            if(locations.size()%10==0) GPX.writePath(new File(Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES),"actualRoot.gpx" ),"Route",locations);
+
+            if (locations.size() % 10 == 0)
+                GPX.writePath(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "actualRoot.gpx"), "Route", locations);
+
             LatLng myPos = new LatLng(location.getLatitude(), location.getLongitude());
-            Log.d("DEBUGGER",myPos+"");
-            if(marker != null)marker.setPosition(myPos);
-           if(!markerAdded){
-              marker = map.addMarker(new MarkerOptions().position(myPos).title("Meine Position"));
-               markerAdded=true;
-               map.moveCamera(CameraUpdateFactory.zoomTo(14.0f));
-               polyLine =  map.addPolyline(polylineOptions);
-               Log.d("DEBUGGER",polyLine+"");
 
-           }
+            Log.d("DEBUGGER", myPos + "");
+            Log.d("DEBUGGER", location.toString());
+
+            if (marker != null) marker.setPosition(myPos);
+
+            if (!markerAdded) {
+                marker = map.addMarker(new MarkerOptions().position(myPos).title("Meine Position"));
+                markerAdded = true;
+                map.moveCamera(CameraUpdateFactory.zoomTo(14.0f));
+                polyLine = map.addPolyline(polylineOptions);
+                Log.d("DEBUGGER", polyLine + "");
+
+            }
             polylineOptions.add(myPos);
-            if(polyLine != null)polyLine.setPoints(polylineOptions.getPoints());
+            if (polyLine != null) polyLine.setPoints(polylineOptions.getPoints());
 
-            Log.d("DEBUGGER",polylineOptions.getPoints()+"");
+            Log.d("DEBUGGER", polylineOptions.getPoints() + "");
 
             map.moveCamera(CameraUpdateFactory.newLatLng(myPos));
 
