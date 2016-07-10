@@ -22,12 +22,15 @@ import android.view.MenuItem;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.se2.wanderlust.Listener.MapCallback;
 import com.se2.wanderlust.Listener.WanderLustLocationListener;
+import com.se2.wanderlust.Support.GPX;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     protected View actualView;
     protected final static String TAG = MainActivity.class.getSimpleName();
     public WanderLustLocationListener locationListener;
+    private LocationManager locationManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,25 +56,9 @@ public class MainActivity extends AppCompatActivity
         new RouteControl(this);
         new RouteInfoControl(this);
         new SettingsControl(this);
-        MapCallback myCallBack = new MapCallback();
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(myCallBack);
 
-        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        locationListener=new WanderLustLocationListener(myCallBack);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 0, locationListener);
+
 
 
     }
@@ -127,5 +114,25 @@ public class MainActivity extends AppCompatActivity
         actualView = v;
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    public void startLocationManager(MapCallback myCallBack) {
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        this.locationListener = new WanderLustLocationListener(myCallBack);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+              return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPX.trackTime, 0, this.locationListener);
+    }
+
+    public void closeLocationManager() {
+        if (locationManager != null) locationManager.removeUpdates(locationListener);
     }
 }
