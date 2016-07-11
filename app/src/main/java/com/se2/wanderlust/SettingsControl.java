@@ -50,7 +50,7 @@ public class SettingsControl{
             }
         });
 
-        if(act.existBarometer) {
+        if(act.barometerListener !=null) {
 
             addPressure = (Button) act.findViewById(R.id.addButton);
             subPressure = (Button) act.findViewById(R.id.subButton);
@@ -81,16 +81,16 @@ public class SettingsControl{
      * @param view
      */
     public void onButtonClick(View view) {
+        if (act.barometerListener !=null) {
+            if (view.getId() == R.id.addButton) {
 
-        if (view.getId() == R.id.addButton){
+                act.barometerListener.hPa = act.barometerListener.hPa + 1;
+            } else if (view.getId() == R.id.subButton) {
 
-            act.hPa = act.hPa + 1;
+                act.barometerListener.hPa = act.barometerListener.hPa - 1;
+            }
+
+            act.barometerListener.saveHPa(act.barometerListener.hPa);
         }
-        else if(view.getId() == R.id.subButton){
-
-            act.hPa = act.hPa - 1;
-        }
-
-        act.saveHPa(act.hPa);
     }
 }

@@ -22,7 +22,9 @@ import com.se2.wanderlust.R;
 import com.se2.wanderlust.Support.GPX;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,29 +33,28 @@ import java.util.List;
  */
 public class WanderLustLocationListener implements LocationListener {
     private final MapCallback myCallBack;
-    private final MainActivity act;
-    private Marker marker = null;
-    private Polyline polyLine = null;
+    private final WanderLustBarometerListener baro;
+    private static Marker marker = null;
+    private static Polyline polyLine = null;
     private PolylineOptions polylineOptions = new PolylineOptions().width(5).color(Color.RED);
     private boolean markerAdded = false;
     private List<Location> locations = new ArrayList<>();
 
+    public Location location;
 
-    //test
-    private int timer = 0;
-    private LatLng[] lt = {new LatLng(52, 13), new LatLng(52, 15), new LatLng(55, 15)};
-    private Location location;
-
-    public WanderLustLocationListener(MapCallback myCallBack, MainActivity act) {
+    public WanderLustLocationListener(MapCallback myCallBack, WanderLustBarometerListener baro) {
         this.myCallBack = myCallBack;
-        this.act =act;
+        this.baro = baro;
+        if(marker !=null)marker.remove();
+        if(polyLine!=null)polyLine.remove();
+
     }
 
     @Override
     public void onLocationChanged(Location location) {
         GoogleMap map = myCallBack.getMap();
 
-        location.setAltitude(act.height);
+        if (baro != null)location.setAltitude(baro.height);
 
         this.location = location;
 
@@ -72,6 +73,7 @@ public class WanderLustLocationListener implements LocationListener {
             if (marker != null) marker.setPosition(myPos);
 
             if (!markerAdded) {
+
                 marker = map.addMarker(new MarkerOptions().position(myPos).title("Meine Position"));
                 markerAdded = true;
                 map.moveCamera(CameraUpdateFactory.zoomTo(14.0f));
@@ -86,16 +88,11 @@ public class WanderLustLocationListener implements LocationListener {
 
             map.moveCamera(CameraUpdateFactory.newLatLng(myPos));
 
-            TextView trackingInfo = (TextView) act.findViewById(R.id.txtTrackingInfo);
-            
-            if(trackingInfo!=null)trackingInfo.setText("Gelaufene Strecker: " + String.format("%.2f", polyLength(polyLine))+"km\n" +
-            "Höhe: " + location.getAltitude()+"m\n" +
-                    "Höhe2: " + act.height
-            );
+
         }
     }
 
-    private double polyLength(Polyline polyLine) {
+    public double polyLength() {
         double polylineLength = 0.0;
         for (int i = 1; i < locations.size(); i++) {
             polylineLength += locations.get(i-1).distanceTo(locations.get(i));
@@ -115,11 +112,11 @@ public class WanderLustLocationListener implements LocationListener {
 
     @Override
     public void onProviderDisabled(String provider) {
-
     }
 
 
     public Location getLocation() {
         return location;
     }
+
 }
