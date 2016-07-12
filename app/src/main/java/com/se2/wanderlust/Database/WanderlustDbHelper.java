@@ -28,6 +28,9 @@ public class WanderlustDbHelper extends SQLiteOpenHelper {
     public static final String USER_COLUMN_ID = "_id";
     public static final String USER_COLUMN_EMAIL = "email";
     public static final String USER_COLUMN_PASSWORD = "password";
+    public static final String USER_COLUMN_PUBLIC_PHOTO = "public_photo";
+    public static final String USER_COLUMN_HPA = "hpa";
+    public static final String USER_COLUMN_TRAKING_RATE = "tracking_rate";
 
     // Database creation sql statement
     private static final String SQL_USER_CREATE = "create table " + TABLE_USER
