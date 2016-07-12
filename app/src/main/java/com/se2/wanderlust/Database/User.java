@@ -7,6 +7,8 @@ package com.se2.wanderlust.Database;
 public class User {
     // id of the user. given by database
     private long id;
+    private String name;
+    private String lastname;
     // email of the user
     private String email;
     // password of the user
@@ -35,6 +37,22 @@ public class User {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
