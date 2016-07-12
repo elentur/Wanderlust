@@ -1,10 +1,15 @@
 package com.se2.wanderlust.Database;
 
+import java.io.Serializable;
+
 /**
  * Created by
  * Roberto on 10.07.16.
  */
-public class User {
+public class User implements Serializable{
+
+    private static final long serialVersionUID = 1;
+
     // id of the user. given by database
     private long id;
     private String name;

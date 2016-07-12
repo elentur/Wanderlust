@@ -357,7 +357,7 @@ public class RegistrationActivity extends AppCompatActivity implements LoaderMan
             if (success) {
                 //finish();
                 Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
-                intent.putExtra("User", user);
+                intent.putExtra("user", user);
                 startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

@@ -315,11 +315,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mPassword = password;
         }
 
+        private User user;
+
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            User user = userDao.getUser(mEmail,mPassword);
+            user = userDao.getUser(mEmail,mPassword);
 
             if(user == null){
                return false;
@@ -336,6 +338,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (success) {
                 //finish();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("user", user);
                 startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
