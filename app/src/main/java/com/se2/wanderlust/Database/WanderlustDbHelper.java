@@ -34,9 +34,12 @@ public class WanderlustDbHelper extends SQLiteOpenHelper {
 
     // Database creation sql statement
     private static final String SQL_USER_CREATE = "create table " + TABLE_USER
-            + "( " + USER_COLUMN_ID + " integer primary key autoincrement,"
+            + "( " + USER_COLUMN_ID + " INTEGER primary key autoincrement,"
             + USER_COLUMN_EMAIL + " TEXT UNIQUE ON CONFLICT FAIL,"
             + USER_COLUMN_PASSWORD + " TEXT"
+            + USER_COLUMN_PUBLIC_PHOTO + " INTEGER"
+            + USER_COLUMN_HPA + " REAL"
+            + USER_COLUMN_TRAKING_RATE + " REAL"
             + ");";
 
     /**

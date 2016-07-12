@@ -17,9 +17,12 @@ public class UserDataSource extends ABasicDataSource {
      * summary of all user table columns
      */
     private String[] allColumns = {
-            WanderlustDbHelper.USER_COLUMN_ID,
-            WanderlustDbHelper.USER_COLUMN_EMAIL,
-            WanderlustDbHelper.USER_COLUMN_PASSWORD
+        WanderlustDbHelper.USER_COLUMN_ID,
+        WanderlustDbHelper.USER_COLUMN_EMAIL,
+        WanderlustDbHelper.USER_COLUMN_PASSWORD,
+        WanderlustDbHelper.USER_COLUMN_PUBLIC_PHOTO,
+        WanderlustDbHelper.USER_COLUMN_HPA,
+        WanderlustDbHelper.USER_COLUMN_TRAKING_RATE
     };
 
     /**
@@ -107,6 +110,24 @@ public class UserDataSource extends ABasicDataSource {
         User User = cursorToUser(cursor);
         cursor.close();
         return User;
+    }
+
+    /**
+     * Updates the user in the database
+     * @param user to update
+     * @return int primary key of the sql table
+     */
+    public int updateUser(User user){
+
+        ContentValues values = new ContentValues();
+
+        values.put(WanderlustDbHelper.USER_COLUMN_EMAIL, user.getEmail());
+        values.put(WanderlustDbHelper.USER_COLUMN_PASSWORD, user.getPassword());
+        values.put(WanderlustDbHelper.USER_COLUMN_PUBLIC_PHOTO, user.getPassword());
+        values.put(WanderlustDbHelper.USER_COLUMN_HPA, user.getHpa());
+        values.put(WanderlustDbHelper.USER_COLUMN_TRAKING_RATE, user.getTracking_rate());
+
+        return database.update(WanderlustDbHelper.TABLE_USER, values, WanderlustDbHelper.USER_COLUMN_ID + " = " + user.getId(),null );
     }
 
     /**

@@ -11,6 +11,12 @@ public class User {
     private String email;
     // password of the user
     private String password;
+    // can we use the photos public
+    public boolean isPublicPhotos = true;
+    // the hpa
+    public double hpa = 0;
+    // the tracking rate in ms
+    public double tracking_rate = 0;
 
     /**
      * Creats a user object
@@ -47,12 +53,39 @@ public class User {
         this.password = password;
     }
 
+    public boolean isPublicPhotos() {
+        return isPublicPhotos;
+    }
+
+    public void setPublicPhotos(boolean publicPhotos) {
+        isPublicPhotos = publicPhotos;
+    }
+
+    public double getHpa() {
+        return hpa;
+    }
+
+    public void setHpa(double hpa) {
+        this.hpa = hpa;
+    }
+
+    public double getTracking_rate() {
+        return tracking_rate;
+    }
+
+    public void setTracking_rate(double tracking_rate) {
+        this.tracking_rate = tracking_rate;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", isPublicPhotos=" + isPublicPhotos +
+                ", hpa=" + hpa +
+                ", tracking_rate=" + tracking_rate +
                 '}';
     }
 }
