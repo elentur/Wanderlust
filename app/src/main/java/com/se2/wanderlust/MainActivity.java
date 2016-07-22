@@ -2,6 +2,7 @@ package com.se2.wanderlust;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -19,18 +20,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.widget.TextView;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.se2.wanderlust.Database.User;
 import com.se2.wanderlust.Listener.MapCallback;
 import com.se2.wanderlust.Listener.WanderLustLocationListener;
 import com.se2.wanderlust.Support.GPX;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     protected View actualView;
     protected final static String TAG = MainActivity.class.getSimpleName();
     public WanderLustLocationListener locationListener;
     private LocationManager locationManager;
 
+
+    protected User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,14 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
+        Intent intent = getIntent();
+
+        user = (User) intent.getSerializableExtra("user");
+
+        TextView userNameView = (TextView) findViewById(R.id.username);
+
+        userNameView.setText(user.getName() + " " + user.getLastname() );
 
     }
 
