@@ -28,9 +28,15 @@ public class SettingsControl{
 
         act = mainActivity;
 
-        SeekBar sldTrackRate = (SeekBar) act.findViewById(R.id.sldTrackRate);
-        final TextView lblTrackrate = (TextView) act.findViewById(R.id.lblTrackRate);
+        Switch chkPuplicPictures = (Switch) act.findViewById(R.id.chkPuplicPictures);
+        chkPuplicPictures.setChecked(act.user.isPublicPhotos());
 
+        // TODO speichern des value bei Änderung
+
+        SeekBar sldTrackRate = (SeekBar) act.findViewById(R.id.sldTrackRate);
+        sldTrackRate.setProgress(act.user.getTracking_rate());
+        final TextView lblTrackrate = (TextView) act.findViewById(R.id.lblTrackRate);
+        lblTrackrate.setText(act.user.getTracking_rate() + "");
         if(sldTrackRate!=null) sldTrackRate.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -45,6 +51,8 @@ public class SettingsControl{
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 GPX.trackTime = seekBar.getProgress();
+                act.user.setTracking_rate(seekBar.getProgress());
+                act.userDao.updateUser(act.user);
 
                 Log.d("DEBUGGER", GPX.trackTime +"");
             }

@@ -48,13 +48,7 @@ public class WanderLustBarometerListener implements SensorEventListener {
      * @return double hPa, retruns 0.0 if no entry found.
      */
     private double getHPa(){
-        SharedPreferences config = act.getSharedPreferences("config", act.MODE_PRIVATE);
-        String str = config.getString("hPa", "");
-        if(str.isEmpty()){
-            return 0.0;
-        }
-
-        return Double.valueOf(str);
+        return act.user.getHpa();
     }
 
     /**
@@ -65,9 +59,12 @@ public class WanderLustBarometerListener implements SensorEventListener {
 
         if(hPa < 0) throw new IllegalArgumentException("hPa can't be lower than zero!");
 
-        SharedPreferences.Editor config = act.getSharedPreferences("config", act.MODE_PRIVATE).edit();
-        config.clear();
-        config.putString( "hPa", String.valueOf(hPa));
-        config.apply();
+        act.user.setHpa(hPa);
+
+        updateDataBase();
+    }
+
+    private void updateDataBase(){
+        act.userDao.updateUser(act.user);
     }
 }

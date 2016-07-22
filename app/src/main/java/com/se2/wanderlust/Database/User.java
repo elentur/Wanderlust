@@ -23,7 +23,7 @@ public class User implements Serializable{
     // the hpa
     public double hpa = 0;
     // the tracking rate in ms
-    public double tracking_rate = 0;
+    public int tracking_rate = 0;
 
     /**
      * Creats a user object
@@ -92,11 +92,11 @@ public class User implements Serializable{
         this.hpa = hpa;
     }
 
-    public double getTracking_rate() {
+    public int getTracking_rate() {
         return tracking_rate;
     }
 
-    public void setTracking_rate(double tracking_rate) {
+    public void setTracking_rate(int tracking_rate) {
         this.tracking_rate = tracking_rate;
     }
 

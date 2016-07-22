@@ -153,8 +153,13 @@ public class UserDataSource extends ABasicDataSource {
         if (cursor.getCount() > 0) {
             user = new User();
             user.setId(cursor.getLong(0));
-            user.setEmail(cursor.getString(1));
-            user.setPassword(cursor.getString(2));
+            user.setName(cursor.getString(1));
+            user.setLastname(cursor.getString(2));
+            user.setEmail(cursor.getString(3));
+            user.setPassword(cursor.getString(4));
+            user.setPublicPhotos(cursor.getInt(5) == 1);
+            user.setHpa(cursor.getDouble(6));
+            user.setTracking_rate(cursor.getInt(7));
         }
 
         return user;

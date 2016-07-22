@@ -43,7 +43,7 @@ public class WanderlustDbHelper extends SQLiteOpenHelper {
             + USER_COLUMN_PASSWORD + " TEXT,"
             + USER_COLUMN_PUBLIC_PHOTO + " INTEGER,"
             + USER_COLUMN_HPA + " REAL,"
-            + USER_COLUMN_TRAKING_RATE + " REAL"
+            + USER_COLUMN_TRAKING_RATE + " INTEGER"
             + ");";
 
     /**

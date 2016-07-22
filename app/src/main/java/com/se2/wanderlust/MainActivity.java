@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.widget.TextView;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.se2.wanderlust.Database.User;
+import com.se2.wanderlust.Database.UserDataSource;
 import com.se2.wanderlust.Listener.MapCallback;
 import com.se2.wanderlust.Listener.WanderLustBarometerListener;
 import com.se2.wanderlust.Listener.WanderLustLocationListener;
@@ -47,12 +48,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private SensorManager mSensorManager;
     protected WanderLustBarometerListener barometerListener = null;
 
-
-    protected User user;
+    public UserDataSource userDao;
+    public User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences config = getSharedPreferences("config", MODE_PRIVATE);
+        String email = config.getString("email", "");
+        String password = config.getString("password", "");
+
+        userDao = new UserDataSource(this);
+        user = userDao.getUser(email,password);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -84,13 +93,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         new SettingsControl(this);
 
 
-        Intent intent = getIntent();
-
-        user = (User) intent.getSerializableExtra("user");
-
         TextView userNameView = (TextView) findViewById(R.id.username);
 
-        userNameView.setText(user.getName() + " " + user.getLastname());
+        //userNameView.setText(user.getName() + " " + user.getLastname());
 
     }
 
