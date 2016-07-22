@@ -3,13 +3,20 @@ package com.se2.wanderlust;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,9 +28,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.widget.TextView;
+
+import android.widget.TextView;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.se2.wanderlust.Database.User;
 import com.se2.wanderlust.Listener.MapCallback;
+import com.se2.wanderlust.Listener.WanderLustBarometerListener;
 import com.se2.wanderlust.Listener.WanderLustLocationListener;
 import com.se2.wanderlust.Support.GPX;
 
@@ -32,6 +42,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected final static String TAG = MainActivity.class.getSimpleName();
     public WanderLustLocationListener locationListener;
     private LocationManager locationManager;
+
+    public Sensor mSensorPressure;
+    private SensorManager mSensorManager;
+    protected WanderLustBarometerListener barometerListener = null;
 
 
     protected User user;
@@ -51,6 +65,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mSensorPressure = mSensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
+
+        if (mSensorPressure != null) {
+            barometerListener = new WanderLustBarometerListener(this);
+            mSensorManager.registerListener(barometerListener, mSensorPressure, SensorManager.SENSOR_DELAY_NORMAL);
+        }
 
 
         actualView = findViewById(R.id.navigation_layout);
@@ -125,9 +147,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
     }
 
-    public void startLocationManager(MapCallback myCallBack) {
+    public boolean startLocationManager(MapCallback myCallBack) {
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        this.locationListener = new WanderLustLocationListener(myCallBack);
+        this.locationListener = new WanderLustLocationListener(myCallBack, barometerListener);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -136,9 +158,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            return;
+            return false;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPX.trackTime, 0, this.locationListener);
+        return true;
     }
 
     public void closeLocationManager() {
@@ -154,4 +177,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return;
             }locationManager.removeUpdates(locationListener);
     }
+
+
 }

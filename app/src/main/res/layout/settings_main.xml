@@ -35,6 +35,68 @@
             android:id="@+id/chkPuplicPictures"
             android:checked="true" />
     </LinearLayout>
+
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/heightArea">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Höhe: "
+        />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/meterValue"
+                android:text="0.0 m"
+                android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pressureArea">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Luftdruck: "
+                android:id="@+id/textPressure"
+        />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="0.0 hPa"
+                android:id="@+id/pressure"
+                android:inputType="text" />
+        <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="+"
+                android:id="@+id/addButton"
+                android:padding="5dp"
+        />
+
+        <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:id="@+id/subButton"
+                android:padding="5dp"
+        />
+    </LinearLayout>
+
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -54,6 +116,7 @@
       />
 
     </LinearLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
