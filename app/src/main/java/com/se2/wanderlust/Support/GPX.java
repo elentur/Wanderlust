@@ -13,13 +13,22 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Team Wanderlust on 30.06.2016.
+ * This class represents the GPX object.
+ * This class is overwritten to save pictures in the gpx format.
+ * Created by
+ * Team Wanderlust on 30.06.2016.
  */
 public class GPX {
     private static final String TAG = GPX.class.getName();
     private static HashMap<Location,String> picture = new HashMap<>();
     public static int trackTime = 3000;
 
+    /**
+     * writes the data in the gpx file
+     * @param file of gpx
+     * @param n name of the route
+     * @param points list of points
+     */
     public static void writePath(File file, String n, List<Location> points) {
 
         String header = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?><gpx xmlns=\"http://www.topografix.com/GPX/1/1\" creator=\"MapSource 6.15.5\" version=\"1.1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"  xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\"><trk>\n";
@@ -51,6 +60,12 @@ public class GPX {
             Log.e(TAG, "Error Writting Path",e);
         }
     }
+
+    /**
+     * sets the picture
+     * @param loc location of the picture
+     * @param path of the picture
+     */
     public static void setPicture(Location loc, String path ) {
         picture.put(loc,path);
     }

@@ -8,7 +8,7 @@ import android.provider.BaseColumns;
 
 /**
  * Created by
- * Roberto on 10.07.16.
+ * Team Wanderlust on 10.07.16.
  * WanderlustDbHelper creates all necessary tables and controls the behavior when Database will be update
  */
 public class WanderlustDbHelper extends SQLiteOpenHelper {

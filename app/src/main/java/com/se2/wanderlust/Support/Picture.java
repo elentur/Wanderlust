@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * This class represents the Picture.
+ * This class represents the Picture object.
  * Starts the Camera and saves a picture with the gps coordinates.
  * Created by
  * Team Wanderlust on 02.07.2016.

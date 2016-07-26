@@ -3,8 +3,10 @@ package com.se2.wanderlust.Database;
 import java.io.Serializable;
 
 /**
+ * Creates a instance of the user object.
+ * Contains the user data and settings.
  * Created by
- * Roberto on 10.07.16.
+ * Team Wanderlust on 10.07.16.
  */
 public class User implements Serializable{
 
