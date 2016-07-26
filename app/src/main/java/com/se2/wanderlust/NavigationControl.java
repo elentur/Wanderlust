@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.SupportMapFragment;
@@ -40,6 +42,8 @@ public class NavigationControl {
     private final MapCallback myCallBack;
     private final ImageView btnStart;
     private boolean isTracking = false;
+    private long start;
+    private Handler mHandler;
 
 
     public NavigationControl(MainActivity mainActivity) {
@@ -84,18 +88,42 @@ public class NavigationControl {
                 public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(act,"Tracking beendet", Toast.LENGTH_SHORT).show();
                     act.closeLocationManager();
+
                     btnStart.setColorFilter(Color.BLACK);
                 }
+
             }).setNegativeButton(android.R.string.no,null).show();
 
             Log.d(act.TAG, "stop");
         } else {
             isTracking = true;
 
+            start = new Date().getTime();
+            mHandler = new Handler();
+           if(act.startLocationManager(myCallBack)){
+               mHandler.postDelayed(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            if(act.locationListener !=null && act.locationListener.location !=null) {
+                                TextView trackingInfo = (TextView) act.findViewById(R.id.txtTrackingInfo);
+                                long timeInSec = ((new Date().getTime() - start) / 1000);
+                                int sec = (int) (timeInSec % 60);
+                                int min = (int) ((timeInSec / 60) % 60);
+                                int hour = (int) ((timeInSec / 3600) % 25);
 
-            act.startLocationManager(myCallBack);
+                                if (trackingInfo != null) trackingInfo.setText(
+                                        act.getString(R.string.walkedWay) + String.format("%.2f", act.locationListener.polyLength()) + "km\n" +
+                                                act.getString(R.string.height) + act.locationListener.location.getAltitude() + "\n" +
+                                                act.getString(R.string.Duration) +  hour + ":" + String.format("%02d", min) + ":" + String.format("%02d", sec)
+                                );
+                            }
+                                if (isTracking) mHandler.postDelayed(this, 1000);
 
+                        }
+                    },1000);
             btnStart.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+           }
             Log.d(act.TAG, "start");
         }
     }

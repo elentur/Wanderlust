@@ -8,11 +8,12 @@
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
-              tools:context="com.se2.wanderlust.LoginActivity">
+              tools:context="com.se2.wanderlust.RegistrationActivity">
 
-    <!-- Login progress -->
+
+    <!-- registration progress -->
     <ProgressBar
-            android:id="@+id/login_progress"
+            android:id="@+id/registration_progress"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,15 +21,45 @@
             android:visibility="gone"/>
 
     <ScrollView
-            android:id="@+id/login_form"
+            android:id="@+id/registration_form"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         <LinearLayout
-                android:id="@+id/email_login_form"
+                android:id="@+id/email_registration_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/prompt_name"
+                        android:inputType="textPersonName"
+                        android:maxLines="1"
+                        android:singleLine="true"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                        android:id="@+id/lastname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/prompt_lastname"
+                        android:inputType="textPersonName"
+                        android:maxLines="1"
+                        android:singleLine="true"/>
+
+            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -54,7 +85,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/prompt_password"
-                        android:imeActionId="@+id/login"
+                        android:imeActionId="@+id/registration"
                         android:imeActionLabel="@string/action_sign_in_short"
                         android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
@@ -64,25 +95,15 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                    android:id="@+id/email_sign_in_button"
-                    style="?android:textAppearanceSmall"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/action_sign_in"
-                    android:textStyle="bold"/>
-
-            <Button
                     android:id="@+id/register_button"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/action_register"
-                    android:textStyle="bold"
-                    android:onClick="registerActivity"
-            />
+                    android:textStyle="bold"/>
 
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
