@@ -324,7 +324,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             user = userDao.getUser(mEmail,mPassword);
 
-            if(user == null){
+            if(user.getId() == -1){
                return false;
             }
 

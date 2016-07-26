@@ -11,7 +11,7 @@ public class User implements Serializable{
     private static final long serialVersionUID = 1;
 
     // id of the user. given by database
-    private long id;
+    private long id = -1;
     private String name;
     private String lastname;
     // email of the user

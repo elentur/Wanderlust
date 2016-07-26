@@ -148,10 +148,9 @@ public class UserDataSource extends ABasicDataSource {
      * @return user obbject
      */
     private User cursorToUser(Cursor cursor) {
-        User user = null;
+        User user = new User();
 
         if (cursor.getCount() > 0) {
-            user = new User();
             user.setId(cursor.getLong(0));
             user.setName(cursor.getString(1));
             user.setLastname(cursor.getString(2));

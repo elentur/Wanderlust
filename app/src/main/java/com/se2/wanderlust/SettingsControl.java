@@ -29,14 +29,18 @@ public class SettingsControl{
         act = mainActivity;
 
         Switch chkPuplicPictures = (Switch) act.findViewById(R.id.chkPuplicPictures);
+        assert chkPuplicPictures != null;
         chkPuplicPictures.setChecked(act.user.isPublicPhotos());
 
         // TODO speichern des value bei Änderung
 
         SeekBar sldTrackRate = (SeekBar) act.findViewById(R.id.sldTrackRate);
+        assert sldTrackRate != null;
         sldTrackRate.setProgress(act.user.getTracking_rate());
         final TextView lblTrackrate = (TextView) act.findViewById(R.id.lblTrackRate);
+        assert lblTrackrate != null;
         lblTrackrate.setText(act.user.getTracking_rate() + "");
+
         if(sldTrackRate!=null) sldTrackRate.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -92,10 +96,11 @@ public class SettingsControl{
         if (act.barometerListener !=null) {
             if (view.getId() == R.id.addButton) {
 
-                act.barometerListener.hPa = act.barometerListener.hPa + 1;
+                act.barometerListener.hPa = act.barometerListener.hPa + 0.1;
             } else if (view.getId() == R.id.subButton) {
 
-                act.barometerListener.hPa = act.barometerListener.hPa - 1;
+                act.barometerListener.hPa = act.barometerListener.hPa - 0.1
+                ;
             }
 
             act.barometerListener.saveHPa(act.barometerListener.hPa);

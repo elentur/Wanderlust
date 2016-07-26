@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected WanderLustBarometerListener barometerListener = null;
 
     public UserDataSource userDao;
-    public User user;
+    public User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
