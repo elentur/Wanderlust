@@ -2,21 +2,18 @@ package com.se2.wanderlust;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
+
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
+
 import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
+
 import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
+
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,13 +21,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+
 import android.view.MenuItem;
 
 import android.widget.TextView;
 
-import android.widget.TextView;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.se2.wanderlust.Database.User;
 import com.se2.wanderlust.Database.UserDataSource;
 import com.se2.wanderlust.Listener.MapCallback;
@@ -38,6 +33,13 @@ import com.se2.wanderlust.Listener.WanderLustBarometerListener;
 import com.se2.wanderlust.Listener.WanderLustLocationListener;
 import com.se2.wanderlust.Support.GPX;
 
+/**
+ * This class represents the main activity.
+ * It connects the database, starts all listener and controls the controller.
+ *
+ * Created by
+ * Team Wanderlust on 05.06.2016.
+ */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     protected View actualView;
     protected final static String TAG = MainActivity.class.getSimpleName();
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String password = config.getString("password", "");
 
         userDao = new UserDataSource(this);
-        user = userDao.getUser(email,password);
+        user = userDao.getUser(email, password);
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -169,6 +171,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    /**
+     * removes all listener if tracking is stopped.
+     */
     public void closeLocationManager() {
         if (locationManager != null)
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -180,7 +185,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
                 return;
-            }locationManager.removeUpdates(locationListener);
+            }
+        locationManager.removeUpdates(locationListener);
     }
 
 

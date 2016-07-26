@@ -15,11 +15,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by Marcus Bätz on 02.07.2016.
+ * This class represents the Picture.
+ * Starts the Camera and saves a picture with the gps coordinates.
+ * Created by
+ * Team Wanderlust on 02.07.2016.
  */
 public class Picture {
     static final int REQUEST_TAKE_PHOTO = 1;
     private static String mCurrentPhotoPath;
+
+    /**
+     * starts the camera on the device.
+     * @param act
+     */
     public static void takePicture(MainActivity act ) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
@@ -43,6 +51,11 @@ public class Picture {
         }
     }
 
+    /**
+     * Creates a photo file.
+     * @return File
+     * @throws IOException
+     */
     private static File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";

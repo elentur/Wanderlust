@@ -1,41 +1,28 @@
 package com.se2.wanderlust;
 
-import android.Manifest;
-import android.content.Context;
+
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.location.LocationManager;
-import android.media.Image;
-import android.net.Uri;
-import android.os.Environment;
 import android.os.Handler;
-import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.maps.SupportMapFragment;
 import com.se2.wanderlust.Listener.MapCallback;
-import com.se2.wanderlust.Listener.WanderLustLocationListener;
-import com.se2.wanderlust.Support.GPX;
 import com.se2.wanderlust.Support.Picture;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by Marcus Bätz on 05.06.2016.
+ * This class represents the navigation controller.
+ * Its starts the navigation and takes pictures which contains the gps coordinate.
+ *
+ * Created by
+ * Team Wanderlust on 05.06.2016.
  */
 public class NavigationControl {
     private final MainActivity act;
@@ -45,7 +32,10 @@ public class NavigationControl {
     private long start;
     private Handler mHandler;
 
-
+    /**
+     * Creates a instance of the NavigationControl object
+     * @param mainActivity from activity
+     */
     public NavigationControl(MainActivity mainActivity) {
         act = mainActivity;
         btnStart = (ImageView) act.findViewById(R.id.btnStart);
@@ -70,11 +60,17 @@ public class NavigationControl {
 
     }
 
+    /**
+     * shows the route information
+     */
     private void info() {
         Log.d(act.TAG, "info");
         Picture.takePicture(act);
     }
 
+    /**
+     * starts the tracking mode
+     */
     private void start() {
 
 

@@ -7,7 +7,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
- * Created by Marcus Bätz on 30.06.2016.
+ * Created by Team Wanderlust on 30.06.2016.
  */
 public class MapCallback implements OnMapReadyCallback {
     private GoogleMap mMap;
