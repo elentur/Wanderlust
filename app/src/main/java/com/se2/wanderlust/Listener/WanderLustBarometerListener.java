@@ -11,21 +11,31 @@ import com.se2.wanderlust.R;
 
 /**
  * Created by Team Wanderlust on 10.07.2016.
+ *
+ * The Barometrical SensorListener that calculates the height above ms
  */
 public class WanderLustBarometerListener implements SensorEventListener {
     private final MainActivity act;
     public double hPa;
     public double height;
+
+    /**
+     * sets hpa, if it is negativ it will get a default value
+     * @param act The MainActivity
+     */
     public WanderLustBarometerListener(MainActivity act){
         this.act =act;
         hPa = getHPa();
-
         if(hPa <= 0){
             hPa = 1015;
             saveHPa(hPa);
         }
     }
 
+    /**
+     * On sensor changed it calculates the actual hight
+     * @param event SensorChanged Event
+     */
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor == act.mSensorPressure) {
@@ -38,6 +48,11 @@ public class WanderLustBarometerListener implements SensorEventListener {
         }
     }
 
+    /**
+     * Not used
+     * @param sensor
+     * @param accuracy
+     */
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
@@ -64,6 +79,9 @@ public class WanderLustBarometerListener implements SensorEventListener {
         updateDataBase();
     }
 
+    /**
+     * Updates the database
+     */
     private void updateDataBase(){
         act.userDao.updateUser(act.user);
     }

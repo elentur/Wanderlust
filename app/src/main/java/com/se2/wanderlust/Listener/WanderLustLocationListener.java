@@ -30,6 +30,8 @@ import java.util.List;
 
 /**
  * Created by Team Wanderlust on 30.06.2016.
+ *
+ * The GPS sensorListener
  */
 public class WanderLustLocationListener implements LocationListener {
     private final MapCallback myCallBack;
@@ -42,6 +44,11 @@ public class WanderLustLocationListener implements LocationListener {
 
     public Location location;
 
+    /**
+     *
+     * @param myCallBack The Googlemaps CallBack
+     * @param baro The BaromterListener
+     */
     public WanderLustLocationListener(MapCallback myCallBack, WanderLustBarometerListener baro) {
         this.myCallBack = myCallBack;
         this.baro = baro;
@@ -50,6 +57,11 @@ public class WanderLustLocationListener implements LocationListener {
 
     }
 
+    /**
+     * On LocationChanged Event calculates the rout, displays it on the google map and safes ist to
+     * a gpx file
+     * @param location The new Location
+     */
     @Override
     public void onLocationChanged(Location location) {
         GoogleMap map = myCallBack.getMap();
@@ -92,6 +104,10 @@ public class WanderLustLocationListener implements LocationListener {
         }
     }
 
+    /**
+     * Calculates the distanz of the polyline
+     * @return returns the length in km
+     */
     public double polyLength() {
         double polylineLength = 0.0;
         for (int i = 1; i < locations.size(); i++) {
@@ -100,21 +116,38 @@ public class WanderLustLocationListener implements LocationListener {
         return polylineLength/1000.0;
     }
 
+    /**
+     * not used
+     * @param provider
+     * @param status
+     * @param extras
+     */
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
 
     }
 
+    /**
+     * not used
+     * @param provider
+     */
     @Override
     public void onProviderEnabled(String provider) {
 
     }
 
+    /**
+     * not used
+     * @param provider
+     */
     @Override
     public void onProviderDisabled(String provider) {
     }
 
-
+    /**
+     * returns the actual location
+     * @return
+     */
     public Location getLocation() {
         return location;
     }
