@@ -20,7 +20,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_main">Wanderlust</string>
+    <string name="title_activity_main">WanderLust</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -38,7 +38,7 @@
     <string name="own_material">Eigenes Kartenmaterial</string>
     <string name="public_pictures">Fotos öffentlich</string>
     <string name="title_activity_maps">Map</string>
-    <string name="walkedWay">"Gelaufene Strecker: "</string>
+    <string name="walkedWay">"Gelaufene Strecke: "</string>
     <string name="height">"Höhe: "</string>
     <string name="Duration">"Dauer: "</string>
 </resources>
