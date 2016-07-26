@@ -31,6 +31,9 @@ import java.util.regex.Pattern;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
+/**
+ * A registration screen that contains the registration form for the user.
+ */
 public class RegistrationActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
 

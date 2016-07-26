@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Marcus Bätz on 30.06.2016.
+ * Created by Team Wanderlust on 30.06.2016.
  */
 public class WanderLustLocationListener implements LocationListener {
     private final MapCallback myCallBack;

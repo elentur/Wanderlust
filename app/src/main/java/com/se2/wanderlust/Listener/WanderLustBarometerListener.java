@@ -10,7 +10,7 @@ import com.se2.wanderlust.MainActivity;
 import com.se2.wanderlust.R;
 
 /**
- * Created by Marcus Bätz on 10.07.2016.
+ * Created by Team Wanderlust on 10.07.2016.
  */
 public class WanderLustBarometerListener implements SensorEventListener {
     private final MainActivity act;

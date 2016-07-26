@@ -1,12 +1,6 @@
 package com.se2.wanderlust;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
@@ -14,16 +8,22 @@ import android.widget.*;
 import com.se2.wanderlust.Support.GPX;
 
 /**
- * Created by Marcus Bätz on 05.06.2016.
+ * Is a controller which initialise all setting operating elements
+ * and saves the hPa and the track rate from the Seek Bar in the Database.
+ *
+ * Created by
+ * Team Wanderlust on 05.06.2016.
  */
 public class SettingsControl{
     private final MainActivity act;
-    private SensorManager mSensorManager;
-    private Sensor mSensorPressure;
 
     private Button addPressure;
     private Button subPressure;
 
+    /**
+     * Its a instance of the SettingsControl object
+     * @param mainActivity android activity
+     */
     public SettingsControl(MainActivity mainActivity) {
 
         act = mainActivity;
@@ -90,7 +90,7 @@ public class SettingsControl{
     /**
      * This method hanldles the button events from the xml methid calls.
      * It increases or decreases the hPa value.
-     * @param view
+     * @param view activity view
      */
     public void onButtonClick(View view) {
         if (act.barometerListener !=null) {
@@ -99,8 +99,7 @@ public class SettingsControl{
                 act.barometerListener.hPa = act.barometerListener.hPa + 0.1;
             } else if (view.getId() == R.id.subButton) {
 
-                act.barometerListener.hPa = act.barometerListener.hPa - 0.1
-                ;
+                act.barometerListener.hPa = act.barometerListener.hPa - 0.1;
             }
 
             act.barometerListener.saveHPa(act.barometerListener.hPa);

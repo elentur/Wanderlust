@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Marcus Bätz on 30.06.2016.
+ * Created by Team Wanderlust on 30.06.2016.
  */
 public class GPX {
     private static final String TAG = GPX.class.getName();

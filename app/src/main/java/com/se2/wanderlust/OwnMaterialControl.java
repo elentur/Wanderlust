@@ -10,11 +10,18 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 /**
- * Created by Marcus Bätz on 05.06.2016.
+ * This class represents the own material controller.
+ * It contains a photo which can map over the original map material.
+ * Created by
+ * Team Wanderlust on 05.06.2016.
  */
 public class OwnMaterialControl {
     private final MainActivity act;
 
+    /**
+     * Creates a instance of the OwnMaterialControl object.
+     * @param mainActivity
+     */
     public OwnMaterialControl(MainActivity mainActivity) {
         act = mainActivity;
         ImageButton btnPicPicture = (ImageButton) act.findViewById(R.id.btnPicPicture);
@@ -32,10 +39,16 @@ public class OwnMaterialControl {
         });
     }
 
+    /**
+     * takes a picture for the map
+     */
     private void picPicture() {
         Log.d(act.TAG," pic picture");
     }
 
+    /**
+     * loads the picture
+     */
     private void loadPicture() {
         Log.d(act.TAG, "load Picture");
     }
