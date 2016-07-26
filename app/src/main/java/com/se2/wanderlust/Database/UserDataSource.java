@@ -8,8 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 /**
+ * This class represents a data access object for the user object and the database.
  * Created by
- * Roberto on 10.07.16.
+ * Team Wanderlust on 10.07.16.
  */
 public class UserDataSource extends ABasicDataSource {
 
@@ -96,7 +97,7 @@ public class UserDataSource extends ABasicDataSource {
     }
 
     /**
-     * Retruns the first user how fits with the given E-Mail and Password
+     * Returns the first user how fits with the given E-Mail and Password
      *
      * @param email    of the user
      * @param password of the user
